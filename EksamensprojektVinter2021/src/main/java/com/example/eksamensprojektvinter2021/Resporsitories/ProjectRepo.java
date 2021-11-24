@@ -14,13 +14,15 @@ public class ProjectRepo {
         try {
             PreparedStatement stmt = JDBC.getConnection().prepareStatement
                     ("INSERT INTO heroku_7aba49c42d6c0f0.project (`name`, `project_deadline`, " +
-                            "`status`, `base_price`, `customer_id`, `manager_id`) VALUES (?, ?, ?, ?, ?, ?);");
+                            "`status`, `base_price`, `customer_id`, `manager_id`, `description`) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?);");
             stmt.setString(1, p.getName());
             stmt.setDate(2, (Date) p.getProjectDeadline());
             stmt.setString(3, p.getStatus());
             stmt.setDouble(4, p.getBasePrice());
             stmt.setInt(5, p.getCustomerId());
             stmt.setInt(6, p.getManagerId());
+            stmt.setString(7, p.getDescription());
             stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("Project could not be inserted into database");
@@ -54,6 +56,10 @@ public class ProjectRepo {
                 p.setTotalPrice(rs.getInt("total_time"));
             }
 
+            if (rs.getString("description") != null){
+                p.setDescription(rs.getString("description"));
+            }
+
             p.setProjectId(rs.getInt("project_id"));
 
         } catch(SQLException e){
@@ -75,12 +81,13 @@ public class ProjectRepo {
 
     }
 
+    //Skal jeg evt. lave if-statements til de attributter, der ikke er NN?
     public void updateProjectInDatabase(Project p) {
         try {
             PreparedStatement stmt = JDBC.getConnection().prepareStatement
                     ("UPDATE `heroku_7aba49c42d6c0f0`.`project` SET `name` = ?, `project_deadline` = ?, " +
                             "`status` = ?, `base_price` = ?, `total_price` = ?, `total_time` = ?, " +
-                            "`customer_id` = ?, `manager_id` = ? WHERE (`project_id` = ?;");
+                            "`customer_id` = ?, `manager_id` = ?, `description` = ? WHERE (`project_id` = ?;");
             stmt.setString(1, p.getName());
             stmt.setDate(2, (Date) p.getProjectDeadline());
             stmt.setString(3, p.getStatus());
@@ -89,6 +96,7 @@ public class ProjectRepo {
             stmt.setInt(6, p.getTotalTime());
             stmt.setInt(7, p.getCustomerId());
             stmt.setInt(8, p.getManagerId());
+            stmt.setString(9, p.getDescription());
             stmt.executeUpdate();
 
         } catch (Exception e) {
@@ -97,6 +105,5 @@ public class ProjectRepo {
         }
 
     }
-
 
 }
