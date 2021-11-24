@@ -27,4 +27,8 @@ public class ProjectService {
         pr.updateProjectInDatabase(p);
     }
 
+    public Project showProject (int projectId) {
+        return pr.getProjectFromDatabase(projectId);
+    }
+
 }

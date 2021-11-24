@@ -1,5 +1,6 @@
 package com.example.eksamensprojektvinter2021.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
@@ -108,6 +109,5 @@ public class Project {
 
     public Project() {
     }
-
 
 }
