@@ -14,6 +14,18 @@ public class ProjectService {
         pr.insertProjectIntoDatabase(p);
     }
 
+    //Jeg har ikke integreret, hvordan metoden får ændringerne fra brugeren.
+    public void updateProject(Project p, String name, Date projectDeadline, String status, double basePrice,
+                              int costumerId, int managerId) {
+        p.setName(name);
+        p.setProjectDeadline(projectDeadline);
+        p.setStatus(status);
+        p.setBasePrice(basePrice);
+        p.setCustomerId(costumerId);
+        p.setManagerId(managerId);
+        pr.updateProjectInDatabase(p);
+    }
+
 
 
 }

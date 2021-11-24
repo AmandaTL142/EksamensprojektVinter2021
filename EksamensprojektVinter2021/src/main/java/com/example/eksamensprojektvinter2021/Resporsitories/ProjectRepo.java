@@ -63,6 +63,40 @@ public class ProjectRepo {
         return p;
     }
 
+    public void deleteProjectFromDatabase(int id) {
+        try {
+            PreparedStatement stmt = JDBC.getConnection().prepareStatement
+                    ("DELETE FROM `heroku_7aba49c42d6c0f0`.`project` WHERE (`project_id` = '" + id + "');");
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Couldn't delete project with id " + id + " from database");
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void updateProjectInDatabase(Project p) {
+        try {
+            PreparedStatement stmt = JDBC.getConnection().prepareStatement
+                    ("UPDATE `heroku_7aba49c42d6c0f0`.`project` SET `name` = ?, `project_deadline` = ?, " +
+                            "`status` = ?, `base_price` = ?, `total_price` = ?, `total_time` = ?, " +
+                            "`customer_id` = ?, `manager_id` = ? WHERE (`project_id` = ?;");
+            stmt.setString(1, p.getName());
+            stmt.setDate(2, (Date) p.getProjectDeadline());
+            stmt.setString(3, p.getStatus());
+            stmt.setDouble(4, p.getBasePrice());
+            stmt.setDouble(5, p.getTotalPrice());
+            stmt.setInt(6, p.getTotalTime());
+            stmt.setInt(7, p.getCustomerId());
+            stmt.setInt(8, p.getManagerId());
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Couldn't update project with id " + p.getProjectId() + " in database");
+            System.out.println(e.getMessage());
+        }
+
+    }
 
 
 }

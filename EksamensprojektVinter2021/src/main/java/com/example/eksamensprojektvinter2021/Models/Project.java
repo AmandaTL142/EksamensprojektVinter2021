@@ -83,7 +83,7 @@ public class Project {
         this.totalTime = totalTime;
     }
 
-    public double getTotalTime() {
+    public int getTotalTime() {
         return totalTime;
     }
 
