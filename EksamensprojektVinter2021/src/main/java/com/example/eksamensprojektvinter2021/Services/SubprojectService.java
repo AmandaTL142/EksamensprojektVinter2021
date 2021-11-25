@@ -1,6 +1,5 @@
 package com.example.eksamensprojektvinter2021.Services;
 
-import com.example.eksamensprojektvinter2021.Models.Project;
 import com.example.eksamensprojektvinter2021.Models.Subproject;
 import com.example.eksamensprojektvinter2021.Resporsitories.SubprojectRepo;
 
@@ -24,7 +23,7 @@ public class SubprojectService {
         spr.updateSubprojectInDatabase(sp);
     }
 
-    public Subproject showSubProject (int subprojectId) {
+    public Subproject showSubproject (int subprojectId) {
         return spr.getSubprojectFromDatabase(subprojectId);
     }
 }
