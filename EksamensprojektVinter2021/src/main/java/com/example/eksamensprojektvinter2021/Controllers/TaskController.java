@@ -8,6 +8,6 @@ public class TaskController {
 
     @GetMapping("/")
     public String index (){
-        return "project";
+        return "index";
     }
 }
