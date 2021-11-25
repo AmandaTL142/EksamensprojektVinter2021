@@ -32,7 +32,7 @@ public class LoginController {
             //}
             return "redirect:/show-projects";
         }
-        else {
+        else {//Ligegyldig ændring
             return "/login";
         }
     }
