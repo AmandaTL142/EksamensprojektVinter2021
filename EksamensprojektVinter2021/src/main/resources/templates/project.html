@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -25,7 +25,14 @@
 </head>
 <body>
 
-<h1> Jeg Virker!</h1>
+<h1> Medarbejders navn</h1>
+
+<h1 ><td th:text="${Project.getName()}"></h1>
+
+    <td th:text="${Project.getDescription()}"></td>
+    <td th:text="${Project.getProjectId()}"></td>
+
+</tr>
 
 </body>
 </html>

@@ -1,10 +1,9 @@
 package com.example.eksamensprojektvinter2021.Models;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Project {
-    private String name;
+    private String projectTitle;
     private Date projectDeadline;
     private String status;
     private double basePrice;
@@ -34,12 +33,12 @@ public class Project {
     private int projectId;
 
 
-    public String getName() {
-        return name;
+    public String getProjectTitle() {
+        return projectTitle;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
     }
 
     public Date getProjectDeadline() {
@@ -99,7 +98,7 @@ public class Project {
     }
 
     public Project(String name, Date projectDeadline, String status, double basePrice, int customerId, int managerId) {
-    this.name = name;
+    this.projectTitle = name;
     this.projectDeadline = projectDeadline;
     this.status = status;
     this.basePrice = basePrice;

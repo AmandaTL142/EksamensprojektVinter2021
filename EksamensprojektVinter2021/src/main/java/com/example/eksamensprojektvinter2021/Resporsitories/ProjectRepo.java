@@ -13,10 +13,10 @@ public class ProjectRepo {
     public void insertProjectIntoDatabase(Project p) {
         try {
             PreparedStatement stmt = JDBC.getConnection().prepareStatement
-                    ("INSERT INTO heroku_7aba49c42d6c0f0.project (`name`, `project_deadline`, " +
+                    ("INSERT INTO heroku_7aba49c42d6c0f0.projects (`title`, `project_deadline`, " +
                             "`status`, `base_price`, `customer_id`, `manager_id`, `description`) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?);");
-            stmt.setString(1, p.getName());
+            stmt.setString(1, p.getProjectTitle());
             stmt.setDate(2, (Date) p.getProjectDeadline());
             stmt.setString(3, p.getStatus());
             stmt.setDouble(4, p.getBasePrice());
@@ -35,7 +35,7 @@ public class ProjectRepo {
         Project p = new Project();
         try {
             PreparedStatement stmt = JDBC.getConnection().prepareStatement("SELECT * FROM " +
-                    "heroku_7aba49c42d6c0f0.project WHERE project_id=?;");
+                    "heroku_7aba49c42d6c0f0.projects WHERE project_id=?;");
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             String name = rs.getString("name");
@@ -72,7 +72,7 @@ public class ProjectRepo {
     public void deleteProjectFromDatabase(int id) {
         try {
             PreparedStatement stmt = JDBC.getConnection().prepareStatement
-                    ("DELETE FROM `heroku_7aba49c42d6c0f0`.`project` WHERE (`project_id` = '" + id + "');");
+                    ("DELETE FROM `heroku_7aba49c42d6c0f0`.`projects` WHERE (`project_id` = '" + id + "');");
             stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("Couldn't delete project with id " + id + " from database");
@@ -85,10 +85,10 @@ public class ProjectRepo {
     public void updateProjectInDatabase(Project p) {
         try {
             PreparedStatement stmt = JDBC.getConnection().prepareStatement
-                    ("UPDATE `heroku_7aba49c42d6c0f0`.`project` SET `name` = ?, `project_deadline` = ?, " +
+                    ("UPDATE `heroku_7aba49c42d6c0f0`.`projects` SET `name` = ?, `project_deadline` = ?, " +
                             "`status` = ?, `base_price` = ?, `total_price` = ?, `total_time` = ?, " +
                             "`customer_id` = ?, `manager_id` = ?, `description` = ? WHERE (`project_id` = ?;");
-            stmt.setString(1, p.getName());
+            stmt.setString(1, p.getProjectTitle());
             stmt.setDate(2, (Date) p.getProjectDeadline());
             stmt.setString(3, p.getStatus());
             stmt.setDouble(4, p.getBasePrice());
@@ -97,6 +97,7 @@ public class ProjectRepo {
             stmt.setInt(7, p.getCustomerId());
             stmt.setInt(8, p.getManagerId());
             stmt.setString(9, p.getDescription());
+            stmt.setInt(9, p.getProjectId());
             stmt.executeUpdate();
 
         } catch (Exception e) {
