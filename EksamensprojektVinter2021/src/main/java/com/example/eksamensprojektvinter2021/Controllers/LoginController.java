@@ -33,7 +33,7 @@ public class LoginController {
             //return "redirect:/show-projects";
         //}
         //else {
-            return "/login";
+            return "login";
         //}
     }
 }
