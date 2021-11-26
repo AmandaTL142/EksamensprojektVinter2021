@@ -21,19 +21,24 @@ public class LoginController {
         String password = wr.getParameter("password");
 
         //Evaluer hvis login matcher database
-        //boolean validPass = LogingService.login(id, password);
+        boolean validPass = LogingService.login(id, password);
 
         //Sæt en bruger som enten Manager eller Medarbejder allerede ved login
-        //if (validPass) {
-            //int userId = LoginService.findUserId(name, password);
-            //session.setAttribute("id", userId);
-            //if (isManager.userId) {
-            //session.setAttribute ("manager", true)
-            //}
-            //return "redirect:/show-projects";
-        //}
-        //else {
+        if (validPass) {
+            int userId = LoginService.findUserId(name, password);
+            session.setAttribute("id", userId);
+            if (isManager(userId)) {//Tjekker om personens id er tilknyttet en Manager rolle
+            session.setAttribute ("manager", true);
+            //Hvordan genkender siden en person som manager eller medarbejder hhv?
+                //Objekt med userId og isManager
+                //Vis forskellige sider til manager og medarbejder
+                //Hvis ingen aktiv session --> websiden vises ikke, henviser til login
+                //Alle sider implementerer metode der tjekker om logget ind
+            }
+            return "redirect:/show-projects";
+        }
+        else {
             return "login";
-        //}
+        }
     }
 }
