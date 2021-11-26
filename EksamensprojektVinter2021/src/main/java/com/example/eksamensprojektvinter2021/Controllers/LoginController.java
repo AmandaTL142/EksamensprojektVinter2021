@@ -34,6 +34,7 @@ public class LoginController {
                 //Vis forskellige sider til manager og medarbejder
                 //Hvis ingen aktiv session --> websiden vises ikke, henviser til login
                 //Alle sider implementerer metode der tjekker om logget ind
+            //Mulighed: Implementer en variation af HTTP-session interface via klasse?
             }
             return "redirect:/show-projects";
         }
